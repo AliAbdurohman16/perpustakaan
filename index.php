@@ -132,30 +132,90 @@
                 include "views/buku/index.php";
               } elseif ($aksi == "tambah") {
                 include "views/buku/tambah.php";
+              } elseif ($aksi == "edit") {
+                if (isset($_GET['id'])) {
+                  include "views/buku/edit.php";
+                } else {
+                  echo "Error: ID buku tidak ditemukan!";
+                }
+              } elseif ($aksi == "hapus") {
+                if (isset($_GET['id'])) {
+                  include "views/buku/index.php";
+                } else {
+                  echo "Error: ID buku tidak ditemukan!";
+                }
               }
             } elseif ($page == "mahasiswa") {
               if ($aksi == "") {
                 include "views/mahasiswa/index.php";
               } elseif ($aksi == "tambah") {
                 include "views/mahasiswa/tambah.php";
+              } elseif ($aksi == "edit") {
+                if (isset($_GET['id'])) {
+                  include "views/mahasiswa/edit.php";
+                } else {
+                  echo "Error: ID mahasiswa tidak ditemukan!";
+                }
+              } elseif ($aksi == "hapus") {
+                if (isset($_GET['id'])) {
+                  include "views/mahasiswa/index.php";
+                } else {
+                  echo "Error: ID mahasiswa tidak ditemukan!";
+                }
               }
             } elseif ($page == "petugas") {
               if ($aksi == "") {
                 include "views/petugas/index.php";
               } elseif ($aksi == "tambah") {
                 include "views/petugas/tambah.php";
+              } elseif ($aksi == "edit") {
+                if (isset($_GET['id'])) {
+                  include "views/petugas/edit.php";
+                } else {
+                  echo "Error: ID petugas tidak ditemukan!";
+                }
+              } elseif ($aksi == "hapus") {
+                if (isset($_GET['id'])) {
+                  include "views/petugas/index.php";
+                } else {
+                  echo "Error: ID petugas tidak ditemukan!";
+                }
               }
             } elseif ($page == "peminjaman") {
               if ($aksi == "") {
                 include "views/peminjaman/index.php";
               } elseif ($aksi == "tambah") {
                 include "views/peminjaman/tambah.php";
+              } elseif ($aksi == "edit") {
+                if (isset($_GET['id'])) {
+                  include "views/peminjaman/edit.php";
+                } else {
+                  echo "Error: ID peminjaman tidak ditemukan!";
+                }
+              } elseif ($aksi == "hapus") {
+                if (isset($_GET['id'])) {
+                  include "views/peminjaman/index.php";
+                } else {
+                  echo "Error: ID peminjaman tidak ditemukan!";
+                }
               }
             } elseif ($page == "pengembalian") {
               if ($aksi == "") {
                 include "views/pengembalian/index.php";
               } elseif ($aksi == "tambah") {
                 include "views/pengembalian/tambah.php";
+              } elseif ($aksi == "edit") {
+                if (isset($_GET['id'])) {
+                  include "views/pengembalian/edit.php";
+                } else {
+                  echo "Error: ID pengembalian tidak ditemukan!";
+                }
+              } elseif ($aksi == "hapus") {
+                if (isset($_GET['id'])) {
+                  include "views/pengembalian/index.php";
+                } else {
+                  echo "Error: ID pengembalian tidak ditemukan!";
+                }
               }
             } else {
               if ($aksi == "") {

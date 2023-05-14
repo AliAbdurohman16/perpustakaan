@@ -8,27 +8,27 @@
                 <form method="POST">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Kode Buku</label>
-                        <input type="text" class="form-control" name="kode_buku" id="exampleFormControlInput1" required>
+                        <input type="text" class="form-control" name="kode_buku" id="exampleFormControlInput1" value="<?php echo $_POST['kode_buku']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Judul Buku</label>
-                        <input type="text" class="form-control" name="judul_buku" id="exampleFormControlInput1" required>
+                        <input type="text" class="form-control" name="judul_buku" id="exampleFormControlInput1" value="<?php echo $_POST['judul_buku']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Penulis Buku</label>
-                        <input type="text" class="form-control" name="penulis_buku" id="exampleFormControlInput1" required>
+                        <input type="text" class="form-control" name="penulis_buku" id="exampleFormControlInput1" value="<?php echo $_POST['penulis_buku']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Penerbit Buku</label>
-                        <input type="text" class="form-control" name="penerbit_buku" id="exampleFormControlInput1" required>
+                        <input type="text" class="form-control" name="penerbit_buku" id="exampleFormControlInput1" value="<?php echo $_POST['penerbit_buku']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tahun Terbit</label>
-                        <input type="number" class="form-control" name="tahun_penerbit" id="exampleFormControlInput1" required>
+                        <input type="number" class="form-control" name="tahun_penerbit" id="exampleFormControlInput1" value="<?php echo $_POST['tahun_penerbit']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="stok" id="exampleFormControlInput1" required>
+                        <input type="number" class="form-control" name="stok" id="exampleFormControlInput1" value="<?php echo $_POST['stok']; ?>" required>
                     </div>
                     <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
                 </form>
@@ -49,11 +49,13 @@
         $sql = "INSERT INTO buku (kode_buku, judul_buku, penulis_buku, penerbit_buku, tahun_penerbit, stok) VALUES ('$kode_buku', '$judul_buku', '$penulis_buku', '$penerbit_buku', '$tahun_penerbit', '$stok')";
 
         if ($conn->query($sql) === TRUE) {
-?>
-            <script type="text/javascript">
-                alert("Data berhasil disimpan!");
-            </script>
-<?php
-        } 
+            echo "<script type='text/javascript'>
+                    if(confirm('Data berhasil ditambahkan!')) {
+                        window.location.href = 'index.php?page=buku';
+                    }
+                </script>";
+        } else {
+            echo "Error adding record: " . $conn->error;
+        }
     }
 ?>

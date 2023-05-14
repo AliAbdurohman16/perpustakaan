@@ -32,8 +32,8 @@
                             <td><?= $data['tahun_penerbit']; ?></td>
                             <td><?= $data['stok']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">Edit</a>
-                                <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="?page=buku&aksi=edit&id=<?= $data['id_buku']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="?page=buku&aksi=hapus&id=<?= $data['id_buku']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data buku ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -43,3 +43,20 @@
         </div>
     </div>
 </div>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['aksi']) && $_GET['aksi'] == 'hapus' && isset($_GET['id'])) {
+    $id_buku = $_GET['id'];
+    $sql = "DELETE FROM buku WHERE id_buku = '$id_buku'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script type='text/javascript'>
+                if(confirm('Data berhasil dihapus!')) {
+                    window.location.href = 'index.php?page=buku';
+                }
+            </script>";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+?>

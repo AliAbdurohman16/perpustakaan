@@ -32,8 +32,8 @@
                             <td>Rp <?= $data['denda']; ?></td>
                             <td><?= $data['nama_petugas']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">Edit</a>
-                                <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="?page=pengembalian&aksi=edit&id=<?= $data['id_pengembalian']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="?page=pengembalian&aksi=hapus&id=<?= $data['id_pengembalian']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data pengembalian ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -43,3 +43,20 @@
         </div>
     </div>
 </div>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['aksi']) && $_GET['aksi'] == 'hapus' && isset($_GET['id'])) {
+    $id_pengembalian = $_GET['id'];
+    $sql = "DELETE FROM pengembalian WHERE id_pengembalian = '$id_pengembalian'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script type='text/javascript'>
+                if(confirm('Data berhasil dihapus!')) {
+                    window.location.href = 'index.php?page=pengembalian';
+                }
+            </script>";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+?>

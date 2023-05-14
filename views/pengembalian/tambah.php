@@ -14,7 +14,7 @@
                                 $sql = $conn->query("SELECT * FROM buku");
                                 foreach ($sql as $buku) {
                             ?>
-                                <option value="<?= $buku['id_buku']?>"><?= $buku['judul_buku']?></option>
+                                <option value="<?= $buku['id_buku']?>" <?php echo (isset($_POST['buku']) && $_POST['buku'] == $buku['id_buku']) ? 'selected' : ''; ?>><?= $buku['judul_buku']?></option>
                             <?php
                                 }
                             ?>
@@ -28,7 +28,7 @@
                                 $sql = $conn->query("SELECT * FROM mahasiswa");
                                 foreach ($sql as $mahasiswa) {
                             ?>
-                                <option value="<?= $mahasiswa['id_mahasiswa']?>"><?= $mahasiswa['nim_mahasiswa']?> - <?= $mahasiswa['nama_mahasiswa']?></option>
+                                <option value="<?= $mahasiswa['id_mahasiswa']?>" <?php echo isset($_POST['mahasiswa']) && $_POST['mahasiswa'] == $mahasiswa['id_mahasiswa'] ? 'selected' : '' ?>><?= $mahasiswa['nim_mahasiswa']?> - <?= $mahasiswa['nama_mahasiswa']?></option>
                             <?php
                                 }
                             ?>
@@ -36,11 +36,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tanggal Pengembalian</label>
-                        <input type="date" class="form-control" name="tgl_kembali" id="exampleFormControlInput1" required>
+                        <input type="date" class="form-control" name="tgl_kembali" id="exampleFormControlInput1" value="<?php echo $_POST['tgl_kembali']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Denda</label>
-                        <input type="number" class="form-control" name="denda" id="exampleFormControlInput1" required>
+                        <input type="number" class="form-control" name="denda" id="exampleFormControlInput1" value="<?php echo $_POST['denda']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nama Petugas</label>
@@ -50,7 +50,7 @@
                                 $sql = $conn->query("SELECT * FROM petugas");
                                 foreach ($sql as $petugas) {
                             ?>
-                                <option value="<?= $petugas['id_petugas']?>"><?= $petugas['nama_petugas']?></option>
+                                <option value="<?= $petugas['id_petugas']?>" <?php echo (isset($_POST['petugas']) && $_POST['petugas'] == $petugas['id_petugas']) ? 'selected' : ''; ?>><?= $petugas['nama_petugas']?></option>
                             <?php
                                 }
                             ?>
@@ -74,11 +74,13 @@
         $sql = "INSERT INTO pengembalian (tanggal_pengembalian, denda, id_buku, id_mahasiswa, id_petugas) VALUES ('$tgl_kembali', '$denda', '$buku', '$mahasiswa', '$petugas')";
 
         if ($conn->query($sql) === TRUE) {
-?>
-            <script type="text/javascript">
-                alert("Data berhasil disimpan!");
-            </script>
-<?php
-        } 
+            echo "<script type='text/javascript'>
+                    if(confirm('Data berhasil ditambahkan!')) {
+                        window.location.href = 'index.php?page=pengembalian';
+                    }
+                </script>";
+        } else {
+            echo "Error adding record: " . $conn->error;
+        }
     }
 ?>

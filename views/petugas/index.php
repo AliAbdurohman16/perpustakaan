@@ -28,8 +28,8 @@
                             <td><?= $data['no_telp_petugas']; ?></td>
                             <td><?= $data['alamat_petugas']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">Edit</a>
-                                <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="?page=petugas&aksi=edit&id=<?= $data['id_petugas']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="?page=petugas&aksi=hapus&id=<?= $data['id_petugas']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data petugas ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -39,3 +39,20 @@
         </div>
     </div>
 </div>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['aksi']) && $_GET['aksi'] == 'hapus' && isset($_GET['id'])) {
+    $id_petugas = $_GET['id'];
+    $sql = "DELETE FROM petugas WHERE id_petugas = '$id_petugas'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script type='text/javascript'>
+                if(confirm('Data berhasil dihapus!')) {
+                    window.location.href = 'index.php?page=petugas';
+                }
+            </script>";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+?>
